@@ -4,6 +4,7 @@ from pathlib import Path
 import sys
 import tempfile
 import workflow
+import improvement
 
 
 def inspect(root):
@@ -31,6 +32,11 @@ def inspect(root):
         report['accepted_tasks_needing_review'] = [t['id'] for t in workflow.view(state, root)['tasks'] if t['attention']]
     except (OSError, ValueError, KeyError, TypeError) as exc:
         checks['state_structure'] = str(exc)
+    try:
+        improvement.validate(improvement.load(root), root)
+        checks['improvement_structure'] = True
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        checks['improvement_structure'] = str(exc)
     report['capabilities'] = {key:'待 AI 按实际工具和操作验证' for key in ('Codex协作', '联网参考', '图像生成', '音频生产', 'Unity编辑器运行', '目标设备运行', '浏览器反馈同步')}
     game = root / 'Game'
     report['game_root_structure'] = all((game / name).is_dir() for name in ('Assets', 'Packages', 'ProjectSettings'))

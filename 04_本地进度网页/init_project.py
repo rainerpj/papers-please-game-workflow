@@ -2,6 +2,7 @@
 from pathlib import Path
 import shutil
 import workflow
+import improvement
 
 
 def main():
@@ -16,6 +17,7 @@ def main():
             if not (target / source.name).is_file():
                 raise SystemExit('模板复制失败：' + source.name)
     workflow.atomic(target / 'state.json', initial)
+    workflow.atomic(target / improvement.NAME, improvement.seed())
     print('项目记录已初始化；所有任务均未验收。')
 
 

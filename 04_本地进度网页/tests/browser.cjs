@@ -8,7 +8,7 @@ const {chromium} = require('playwright');
 const root = path.resolve(__dirname, '../..');
 const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'game-workflow-test-'));
 const copy = path.join(temp, 'project');
-fs.cpSync(root, copy, {recursive:true, filter:source=>!source.split(path.sep).some(x=>['.git','__pycache__','backups','临时测试'].includes(x))});
+fs.cpSync(root, copy, {recursive:true, filter:source=>!source.split(path.sep).some(x=>['.git','__pycache__','backups','临时测试','交付包'].includes(x))});
 const out = path.join(root,'07_示例与交付验收','浏览器证据');
 fs.mkdirSync(out,{recursive:true});
 let child, browser;
@@ -74,7 +74,7 @@ let child, browser;
   await page.screenshot({path:path.join(out,'手机首页.png'),fullPage:true});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   await page.locator('nav').getByRole('button',{name:'推进提示词'}).click();
-  assert.equal(await page.locator('.prompt').count(),20);
+  assert.equal(await page.locator('.prompt').count(),22);
   await page.getByRole('button',{name:'复制提示词'}).first().click();
   assert.match(await page.evaluate(()=>navigator.clipboard.readText()),/完整游戏/);
   // Corrupt state produces an explicit error, retains the last view, and recovers after repair.

@@ -1,0 +1,62 @@
+[
+  {
+    "check": "文档链接",
+    "exit_code": 0,
+    "output": "{\n  \"markdown_files\": 82,\n  \"skills\": 7,\n  \"broken_links\": []\n}\n"
+  },
+  {
+    "check": "环境预检",
+    "exit_code": 0,
+    "output": "{\n  \"scope\": \"当前运行电脑；不代表客户电脑或游戏测试\",\n  \"python\": \"3.12.14\",\n  \"executable\": \"C:\\\\Users\\\\tangc\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\python.exe\",\n  \"root\": \"C:\\\\Users\\\\tangc\\\\Documents\\\\ChatGPT\\\\类paper please游戏开发工作流\",\n  \"checks\": {\n    \"python_3_10_plus\": true,\n    \"AGENTS.md\": true,\n    \"项目记录/state.json\": true,\n    \"write_read\": true,\n    \"state_structure\": true,\n    \"improvement_structure\": true\n  },\n  \"capabilities\": {\n    \"Codex协作\": \"待 AI 按实际工具和操作验证\",\n    \"联网参考\": \"待 AI 按实际工具和操作验证\",\n    \"图像生成\": \"待 AI 按实际工具和操作验证\",\n    \"音频生产\": \"待 AI 按实际工具和操作验证\",\n    \"Unity编辑器运行\": \"待 AI 按实际工具和操作验证\",\n    \"目标设备运行\": \"待 AI 按实际工具和操作验证\",\n    \"浏览器反馈同步\": \"待 AI 按实际工具和操作验证\"\n  },\n  \"revision\": 1,\n  \"accepted_tasks_needing_review\": [],\n  \"game_root_structure\": false,\n  \"game_note\": \"这里只检查 Game 根目录结构；其他位置需 AI 核对。结构存在不代表能运行。\",\n  \"ok\": true\n}\n"
+  },
+  {
+    "check": "改进记录",
+    "exit_code": 0,
+    "output": "{\n  \"ok\": true,\n  \"revision\": 0\n}\n"
+  },
+  {
+    "check": "beginner-game-art",
+    "exit_code": 0,
+    "output": "Skill is valid!\n"
+  },
+  {
+    "check": "beginner-game-design",
+    "exit_code": 0,
+    "output": "Skill is valid!\n"
+  },
+  {
+    "check": "beginner-game-guide",
+    "exit_code": 0,
+    "output": "Skill is valid!\n"
+  },
+  {
+    "check": "beginner-game-reference",
+    "exit_code": 0,
+    "output": "Skill is valid!\n"
+  },
+  {
+    "check": "beginner-game-review",
+    "exit_code": 0,
+    "output": "Skill is valid!\n"
+  },
+  {
+    "check": "beginner-unity-2d",
+    "exit_code": 0,
+    "output": "Skill is valid!\n"
+  },
+  {
+    "check": "beginner-workflow-improve",
+    "exit_code": 0,
+    "output": "Skill is valid!\n"
+  },
+  {
+    "check": "JavaScript 主文件与 browser.cjs 语法",
+    "exit_code": 0,
+    "output": "共享 node.ps1 --check 均通过；未执行 browser.cjs 浏览器流程"
+  },
+  {
+    "check": "git diff --check",
+    "exit_code": 0,
+    "output": "通过；仅有已有 autocrlf 换行提示"
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "revision": 0,
+  "signals": [],
+  "sources": {},
+  "items": [],
+  "reviews": [],
+  "last_task_revision": 0,
+  "cycle": {
+    "at": "2026-11-10T04:34:27+00:00",
+    "game_revision": 0,
+    "signal_count": 0
+  },
+  "policy": {
+    "tasks": 5,
+    "days": 7
+  },
+  "events": []
+}

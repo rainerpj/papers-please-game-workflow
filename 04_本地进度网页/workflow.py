@@ -190,7 +190,7 @@ def blockers(state, task, root=ROOT, admission=False, memo=None):
         result.append('仍有阻碍：' + task['blocker'])
     if task.get('question', '').strip():
         result.append('等待客户决定：' + task['question'])
-    if any(f['task'] == task['id'] and f['status'] == 'open' and f['kind'] == 'problem' for f in state['feedback']):
+    if any(f.get('scope', 'task') != 'workflow' and f['task'] == task['id'] and f['status'] == 'open' and f['kind'] == 'problem' for f in state['feedback']):
         result.append('仍有未处理的问题反馈')
     memo[task['id']] = result
     return result
@@ -260,7 +260,7 @@ def apply(payload, path=STATE, root=ROOT):
         op = payload.get('op')
         tasks = {t['id']: t for t in state['tasks']}
         task = tasks.get(payload.get('task'))
-        if op in ('update', 'reopen', 'feedback') and task is None:
+        if (op in ('update', 'reopen') or (op == 'feedback' and payload.get('scope', 'task') != 'workflow')) and task is None:
             raise Invalid('找不到这项任务。')
         if op == 'update':
             if task['status'] == 'done':
@@ -306,7 +306,19 @@ def apply(payload, path=STATE, root=ROOT):
             nonempty(payload.get('text'), '反馈内容', 3000)
             if payload.get('kind') not in ('idea', 'problem', 'experience'):
                 raise Invalid('反馈类型无效。')
-            state['feedback'].append(dict(id='F' + str(state['revision'] + 1), task=task['id'], text=payload['text'], kind=payload['kind'], status='open', at=now(), resolution=''))
+            scope = payload.get('scope', 'task')
+            if scope not in ('task', 'workflow'):
+                raise Invalid('反馈关联范围无效。')
+            state['feedback'].append(dict(id='F' + str(state['revision'] + 1), task=task['id'] if task else '', scope=scope, text=payload['text'], kind=payload['kind'], status='open', at=now(), resolution=''))
+        elif op == 'route_feedback':
+            f = next((f for f in state['feedback'] if f['id'] == payload.get('feedback')), None)
+            nonempty(payload.get('reason'), '分类原因')
+            if not f or f['status'] != 'open' or payload.get('scope') not in ('task', 'workflow'):
+                raise Invalid('仅能对未处理反馈选择有效关联范围。')
+            if payload['scope'] == 'task' and payload.get('task') not in tasks:
+                raise Invalid('关联游戏任务不存在。')
+            f.setdefault('routing', []).append(dict(at=now(), previous=f.get('scope', 'task'), reason=payload['reason']))
+            f.update(scope=payload['scope'], task=payload.get('task', f['task']))
         elif op == 'dispose_failure':
             if task is None or task['status'] == 'done':
                 raise Invalid('先重新打开需处置失败的任务。')
@@ -363,7 +375,7 @@ def apply(payload, path=STATE, root=ROOT):
             raise Invalid('不支持的操作。')
         state['revision'] += 1
         state['updated'] = now()
-        state['events'].append(dict(at=state['updated'], op=op, task=payload.get('task', ''), revision=state['revision'], reason=payload.get('reason', '')))
+        state['events'].append(dict(at=state['updated'], op=op, task=payload.get('task', ''), revision=state['revision'], reason=payload.get('reason', ''), completed=op == 'update' and task['status'] == 'done'))
         validate(state, root)
         if op == 'update' and task['status'] == 'done':
             issues = blockers(state, task, root, admission=True)

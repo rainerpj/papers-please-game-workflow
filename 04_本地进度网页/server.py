@@ -7,6 +7,7 @@ from urllib.parse import unquote, urlsplit
 import webbrowser
 
 import workflow
+import improvement
 
 ROOT = workflow.ROOT
 WEB = Path(__file__).parent / 'web'
@@ -31,6 +32,15 @@ def evidence_files():
             refs.update(e['path'] for e in h.get('evidence', []))
             refs.update(r['path'] for r in h.get('reviews', {}).values())
     refs.update(r['manifest'] for r in state.get('releases', []))
+    # Bad improvement records must not prevent access to unrelated game evidence.
+    try:
+        for item in improvement.load(ROOT)['items']:
+            if item.get('case_path'):
+                refs.add(item['case_path'])
+            refs.update(r['path'] for r in item.get('checks', {}).values())
+            refs.update(r['path'] for r in item.get('observations', []))
+    except (OSError, ValueError, KeyError, TypeError):
+        pass
     return refs
 
 
@@ -62,6 +72,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.send(workflow.view(state, ROOT) if path == '/api/state' else state)
             elif path == '/api/catalog':
                 self.send(dict(project_key=str(ROOT.resolve()), config=workflow.config(), documents=documents(), prompts=workflow.read_json(Path(__file__).with_name('prompts.json'))))
+            elif path == '/api/improvements':
+                self.send(improvement.view(improvement.load(ROOT), workflow.read_json(workflow.STATE), ROOT))
             elif path.startswith('/docs/'):
                 ref = path[len('/docs/'):]
                 if ref not in documents():
@@ -104,7 +116,7 @@ class Handler(BaseHTTPRequestHandler):
                 raise workflow.Invalid('反馈太长或为空。')
             payload = json.loads(self.rfile.read(size))
             # Browser can append feedback only; never accept an operation supplied by a page.
-            payload = {k: payload.get(k) for k in ('revision', 'task', 'text', 'kind')}
+            payload = {k: payload.get(k) for k in ('revision', 'task', 'text', 'kind')} | {'scope': payload.get('scope', 'task')}
             payload['op'] = 'feedback'
             state = workflow.apply(payload, workflow.STATE, ROOT)
             self.send(workflow.view(state, ROOT))

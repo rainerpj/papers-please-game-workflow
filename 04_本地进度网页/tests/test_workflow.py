@@ -207,6 +207,32 @@ class WorkflowTests(unittest.TestCase):
         s=self.apply(op='reopen',task='T00',reason='更换网页启动环境')
         self.assertEqual(s['tasks'][2]['status'],'done')
 
+    def test_workflow_feedback_does_not_block_game_acceptance(self):
+        self.complete('T00')
+        self.apply(op='feedback', task='', scope='workflow', kind='problem', text='请少问重复问题')
+        state=w.view(w.read_json(self.path),self.root)
+        self.assertTrue(state['tasks'][0]['accepted'])
+        self.assertEqual(state['feedback'][0]['status'],'open')
+
+    def test_route_preserves_original_feedback_and_game_decision(self):
+        self.complete('T00')
+        s=self.apply(op='feedback',task='T00',kind='problem',text='别再重复解释')
+        fid=s['feedback'][0]['id']
+        self.assertFalse(w.view(s,self.root)['tasks'][0]['accepted'])
+        s=self.apply(op='route_feedback',feedback=fid,scope='workflow',reason='核实只涉及协作')
+        self.assertEqual(s['feedback'][0]['text'],'别再重复解释')
+        self.assertEqual(s['feedback'][0]['status'],'open')
+        self.assertTrue(w.view(s,self.root)['tasks'][0]['accepted'])
+        self.assertEqual(s['feedback'][0]['routing'][0]['previous'],'task')
+
+    def test_actual_completion_events_trigger_retrospective(self):
+        import improvement
+        self.complete('T00');self.complete('T01')
+        state=w.read_json(self.path)
+        due=improvement.due(improvement.seed(),state)
+        self.assertEqual(due['task_review'],['T00','T01'])
+        self.assertTrue(due['cycle_reasons'])
+
 
 class HTTPTests(WorkflowTests):
     # Inherit fixtures, but run only HTTP-specific tests in this class.
@@ -264,6 +290,36 @@ class HTTPTests(WorkflowTests):
         req = Request(self.url + '/api/feedback', json.dumps(dict(revision=1,task='T00',kind='problem',text='文件移动')).encode(), headers={'Content-Type':'application/json','Origin':self.url})
         with urlopen(req) as r:
             self.assertEqual(json.load(r)['feedback'][0]['text'], '文件移动')
+
+    def test_http_improvement_failure_is_isolated(self):
+        with urlopen(self.url+'/api/improvements') as response:
+            self.assertEqual(json.load(response)['items'],[])
+        (self.root/'项目记录').mkdir(exist_ok=True)
+        (self.root/'项目记录/工作流改进.json').write_text('{bad',encoding='utf-8')
+        with self.assertRaises(HTTPError) as failure:
+            urlopen(self.url+'/api/improvements')
+        self.assertEqual(failure.exception.code,422)
+        with urlopen(self.url+'/api/state') as response:
+            self.assertEqual(json.load(response)['revision'],0)
+
+    def test_http_workflow_feedback_needs_no_task_and_cannot_edit_ledger(self):
+        data=dict(revision=0,scope='workflow',kind='problem',text='步骤太多')
+        req=Request(self.url+'/api/feedback',json.dumps(data).encode(),headers={'Content-Type':'application/json','Origin':self.url})
+        with urlopen(req) as response:
+            self.assertEqual(json.load(response)['feedback'][0]['scope'],'workflow')
+        req=Request(self.url+'/api/improvements',b'{}',headers={'Content-Type':'application/json','Origin':self.url})
+        with self.assertRaises(HTTPError) as failure:urlopen(req)
+        self.assertEqual(failure.exception.code,400)
+
+    def test_http_does_not_serve_private_change_snapshots(self):
+        import improvement
+        folder=self.root/'项目记录/工作流改进证据/变更备份';folder.mkdir(parents=True)
+        snapshot=folder/'private.json';snapshot.write_text('{}')
+        from urllib.parse import quote
+        for prefix in ('/docs/','/evidence/'):
+            with self.assertRaises(HTTPError) as failure:
+                urlopen(self.url+prefix+quote(snapshot.relative_to(self.root).as_posix()))
+            self.assertEqual(failure.exception.code,404)
 
 
 # Do not duplicate the state tests under HTTPTests.
