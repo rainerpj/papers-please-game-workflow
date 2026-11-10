@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>制作手册 · 我的游戏</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<aside class="sidebar"><a class="brand" href="#home"><span class="mark">制</span><span>游戏制作手册<small>从第一个想法，到完整作品</small></span></a><div class="edition">LOCAL WORKSPACE / 01</div><nav aria-label="主要导航"><button data-view="home" class="selected">今天做什么 <span>↗</span></button><button data-view="roadmap">完整开发路线</button><button data-view="library">指南与项目记录</button><button data-view="prompts">推进提示词</button><button data-view="feedback">我的反馈 <span id="feedback-count">0</span></button></nav><div class="sidebar-bottom"><span class="dot"></span> 本地工作区<p>记录留在这个文件夹里。<br>网页不自动运行 AI。</p><button id="export" class="small">导出进度副本 ↓</button></div></aside>
+<main><header><span id="breadcrumb">工作台 / 今天做什么</span><span id="connection" role="status">正在连接本地记录…</span></header><div id="error" role="alert" hidden></div><section id="screen" aria-live="polite"></section><footer>先做眼前这一步。每一次验收，都留下可以查看的成果。<span>WORKFLOW V0.2</span></footer></main>
+<dialog id="reader"><div class="dialog-head"><h2 id="reader-title">文档</h2><button id="close-reader" aria-label="关闭文档">关闭 ×</button></div><pre id="reader-body"></pre><img id="reader-image" alt="登记的验证截图" hidden></dialog>
+<dialog id="copy-dialog"><div class="dialog-head"><h2>复制这段文字到 AI 对话</h2><button id="close-copy">关闭 ×</button></div><textarea id="copy-text" rows="10" aria-label="待复制提示词"></textarea><p>浏览器未允许自动复制。请选中文字后按 Ctrl+C。</p></dialog>
+<div id="toast" role="status" hidden></div><script src="/app.js"></script></body></html>

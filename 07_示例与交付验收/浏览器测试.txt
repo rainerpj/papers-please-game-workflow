@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "checks": [
+    "desktop",
+    "mobile",
+    "copy",
+    "roadmap",
+    "docs",
+    "feedback persistence",
+    "XSS text",
+    "external sync",
+    "draft preservation",
+    "pending question",
+    "new document sync",
+    "corrupt state recovery"
+  ],
+  "browser": "156.0.8078.81",
+  "screenshots": "C:\\Users\\tangc\\Documents\\ChatGPT\\类paper please游戏开发工作流\\07_示例与交付验收\\浏览器证据"
+}
+Isolated fixture retained at C:\Users\tangc\AppData\Local\Temp\game-workflow-test-KWtDoN

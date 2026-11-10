@@ -1,0 +1,27 @@
+test_http_denies_arbitrary_files (test_workflow.HTTPTests.test_http_denies_arbitrary_files) ... ok
+test_http_feedback_cannot_override_operation (test_workflow.HTTPTests.test_http_feedback_cannot_override_operation) ... ok
+test_http_rejects_foreign_origin (test_workflow.HTTPTests.test_http_rejects_foreign_origin) ... ok
+test_http_serves_only_registered_evidence (test_workflow.HTTPTests.test_http_serves_only_registered_evidence) ... ok
+test_add_task_and_prevent_unnoticed_new_scope (test_workflow.WorkflowTests.test_add_task_and_prevent_unnoticed_new_scope) ... ok
+test_blocked_needs_explanation (test_workflow.WorkflowTests.test_blocked_needs_explanation) ... ok
+test_complete_backup_and_conflict (test_workflow.WorkflowTests.test_complete_backup_and_conflict) ... ok
+test_complete_entire_lifecycle_with_explicit_evidence (test_workflow.WorkflowTests.test_complete_entire_lifecycle_with_explicit_evidence) ... ok
+test_customer_evidence_required_after_scope_stage (test_workflow.WorkflowTests.test_customer_evidence_required_after_scope_stage) ... ok
+test_done_requires_reviews_and_evidence (test_workflow.WorkflowTests.test_done_requires_reviews_and_evidence) ... ok
+test_feedback_is_not_acceptance (test_workflow.WorkflowTests.test_feedback_is_not_acceptance) ... ok
+test_later_stage_cannot_skip_dependencies (test_workflow.WorkflowTests.test_later_stage_cannot_skip_dependencies) ... ok
+test_latest_failure_overrides_success (test_workflow.WorkflowTests.test_latest_failure_overrides_success) ... ok
+test_lock_and_corruption_do_not_reset (test_workflow.WorkflowTests.test_lock_and_corruption_do_not_reset) ... ok
+test_minimum_checks_and_cycle_protected (test_workflow.WorkflowTests.test_minimum_checks_and_cycle_protected) ... ok
+test_missing_and_outside_evidence_rejected (test_workflow.WorkflowTests.test_missing_and_outside_evidence_rejected) ... ok
+test_problem_after_acceptance_reopens_and_retains_evidence (test_workflow.WorkflowTests.test_problem_after_acceptance_reopens_and_retains_evidence) ... ok
+test_problem_blocks_and_resolution_allows_acceptance (test_workflow.WorkflowTests.test_problem_blocks_and_resolution_allows_acceptance) ... ok
+test_question_requires_explicit_resolution (test_workflow.WorkflowTests.test_question_requires_explicit_resolution) ... ok
+test_reopen_follows_same_stage_dependency (test_workflow.WorkflowTests.test_reopen_follows_same_stage_dependency) ... ok
+test_scope_change_requires_invalidating_evidence (test_workflow.WorkflowTests.test_scope_change_requires_invalidating_evidence) ... ok
+test_seed_has_full_lifecycle_without_false_completion (test_workflow.WorkflowTests.test_seed_has_full_lifecycle_without_false_completion) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 5.085s
+
+OK

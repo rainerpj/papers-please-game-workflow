@@ -1,0 +1,35 @@
+test_http_denies_arbitrary_files (test_workflow.HTTPTests.test_http_denies_arbitrary_files) ... ok
+test_http_feedback_cannot_override_operation (test_workflow.HTTPTests.test_http_feedback_cannot_override_operation) ... ok
+test_http_missing_evidence_keeps_read_export_feedback_available (test_workflow.HTTPTests.test_http_missing_evidence_keeps_read_export_feedback_available) ... ok
+test_http_rejects_foreign_origin (test_workflow.HTTPTests.test_http_rejects_foreign_origin) ... ok
+test_http_serves_only_registered_evidence (test_workflow.HTTPTests.test_http_serves_only_registered_evidence) ... ok
+test_add_task_and_prevent_unnoticed_new_scope (test_workflow.WorkflowTests.test_add_task_and_prevent_unnoticed_new_scope) ... ok
+test_blocked_needs_explanation (test_workflow.WorkflowTests.test_blocked_needs_explanation) ... ok
+test_complete_backup_and_conflict (test_workflow.WorkflowTests.test_complete_backup_and_conflict) ... ok
+test_complete_entire_lifecycle_with_explicit_evidence (test_workflow.WorkflowTests.test_complete_entire_lifecycle_with_explicit_evidence) ... ok
+test_content_batch_cannot_depend_on_own_checkpoint (test_workflow.WorkflowTests.test_content_batch_cannot_depend_on_own_checkpoint) ... ok
+test_customer_evidence_required_after_scope_stage (test_workflow.WorkflowTests.test_customer_evidence_required_after_scope_stage) ... ok
+test_done_requires_reviews_and_evidence (test_workflow.WorkflowTests.test_done_requires_reviews_and_evidence) ... ok
+test_environment_reopen_does_not_reopen_game_design (test_workflow.WorkflowTests.test_environment_reopen_does_not_reopen_game_design) ... ok
+test_feedback_is_not_acceptance (test_workflow.WorkflowTests.test_feedback_is_not_acceptance) ... ok
+test_later_stage_cannot_skip_dependencies (test_workflow.WorkflowTests.test_later_stage_cannot_skip_dependencies) ... ok
+test_latest_failure_overrides_success (test_workflow.WorkflowTests.test_latest_failure_overrides_success) ... ok
+test_lifecycle_release_expansion_and_patch (test_workflow.WorkflowTests.test_lifecycle_release_expansion_and_patch) ... ok
+test_lock_and_corruption_do_not_reset (test_workflow.WorkflowTests.test_lock_and_corruption_do_not_reset) ... ok
+test_minimum_checks_and_cycle_protected (test_workflow.WorkflowTests.test_minimum_checks_and_cycle_protected) ... ok
+test_missing_and_outside_evidence_rejected (test_workflow.WorkflowTests.test_missing_and_outside_evidence_rejected) ... ok
+test_missing_evidence_allows_read_feedback_and_repair (test_workflow.WorkflowTests.test_missing_evidence_allows_read_feedback_and_repair) ... ok
+test_nonblocking_disposition_needs_customer_record (test_workflow.WorkflowTests.test_nonblocking_disposition_needs_customer_record) ... ok
+test_optional_failure_requires_explicit_retest (test_workflow.WorkflowTests.test_optional_failure_requires_explicit_retest) ... ok
+test_problem_after_acceptance_waits_for_triage (test_workflow.WorkflowTests.test_problem_after_acceptance_waits_for_triage) ... ok
+test_problem_blocks_and_resolution_allows_acceptance (test_workflow.WorkflowTests.test_problem_blocks_and_resolution_allows_acceptance) ... ok
+test_question_requires_explicit_resolution (test_workflow.WorkflowTests.test_question_requires_explicit_resolution) ... ok
+test_reopen_follows_same_stage_dependency (test_workflow.WorkflowTests.test_reopen_follows_same_stage_dependency) ... ok
+test_required_failure_cannot_be_waived (test_workflow.WorkflowTests.test_required_failure_cannot_be_waived) ... ok
+test_scope_change_requires_invalidating_evidence (test_workflow.WorkflowTests.test_scope_change_requires_invalidating_evidence) ... ok
+test_seed_has_full_lifecycle_without_false_completion (test_workflow.WorkflowTests.test_seed_has_full_lifecycle_without_false_completion) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 12.254s
+
+OK

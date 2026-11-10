@@ -1,0 +1,27 @@
+{
+  "scope": "当前运行电脑；不代表客户电脑或游戏测试",
+  "python": "3.12.14",
+  "executable": "C:\\Users\\tangc\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+  "root": "C:\\Users\\tangc\\Documents\\ChatGPT\\类paper please游戏开发工作流",
+  "checks": {
+    "python_3_10_plus": true,
+    "AGENTS.md": true,
+    "项目记录/state.json": true,
+    "write_read": true,
+    "state_structure": true
+  },
+  "capabilities": {
+    "Codex协作": "待 AI 按实际工具和操作验证",
+    "联网参考": "待 AI 按实际工具和操作验证",
+    "图像生成": "待 AI 按实际工具和操作验证",
+    "音频生产": "待 AI 按实际工具和操作验证",
+    "Unity编辑器运行": "待 AI 按实际工具和操作验证",
+    "目标设备运行": "待 AI 按实际工具和操作验证",
+    "浏览器反馈同步": "待 AI 按实际工具和操作验证"
+  },
+  "revision": 1,
+  "accepted_tasks_needing_review": [],
+  "game_root_structure": false,
+  "game_note": "这里只检查 Game 根目录结构；其他位置需 AI 核对。结构存在不代表能运行。",
+  "ok": true
+}

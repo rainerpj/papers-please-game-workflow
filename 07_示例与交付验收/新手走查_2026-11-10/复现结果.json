@@ -1,0 +1,67 @@
+{
+  "scope": "isolated state-machine probes; no actual game execution",
+  "fixture_root": "C:\\Users\\tangc\\AppData\\Local\\Temp\\novice-workflow-review-6dmfqzji",
+  "results": [
+    {
+      "id": "R01",
+      "finding": "重开受影响任务 T50 后，因同阶段 T51 已验收，仍不能新增 T52",
+      "error": "此阶段或后续已有验收任务，请先 reopen 受影响的基线任务。"
+    },
+    {
+      "id": "R02",
+      "finding": "证据改名后，重开、报错和其他任务更新都被全量预校验阻止",
+      "errors": [
+        "证据文件不存在或位于项目外：evidence.md",
+        "证据文件不存在或位于项目外：evidence.md",
+        "证据文件不存在或位于项目外：evidence.md"
+      ]
+    },
+    {
+      "id": "R03",
+      "finding": "已完成周期的准备阶段问题反馈使 19/20 项退回未开始，包括已交付游戏和维护",
+      "reopened": [
+        "T00",
+        "T10",
+        "T11",
+        "T20",
+        "T21",
+        "T30",
+        "T31",
+        "T40",
+        "T41",
+        "T50",
+        "T51",
+        "T60",
+        "T61",
+        "T70",
+        "T71",
+        "T80",
+        "T81",
+        "T90",
+        "T91"
+      ]
+    },
+    {
+      "id": "R04",
+      "finding": "核心玩法已登记自动测试失败且未作处置，仍可被验收",
+      "status": "done",
+      "required": [
+        "document",
+        "editor"
+      ]
+    },
+    {
+      "id": "R05",
+      "finding": "文档示例让第二批事件依赖完成全部内容；第二批不能先验收，但全部内容可先验收",
+      "subtask_error": "T52 尚不能验收：先完成前置阶段或依赖任务",
+      "aggregate_status": "done",
+      "subtask_status": "pending"
+    },
+    {
+      "id": "R06",
+      "finding": "基线没有同阶段依赖，玩法运行任务可在准备 Unity 工程任务未验收时通过；需区分合理并行和真实依赖",
+      "environment_status": "pending",
+      "prototype_status": "done"
+    }
+  ]
+}

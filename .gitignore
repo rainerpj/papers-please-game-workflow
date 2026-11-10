@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+项目记录/.state.lock
+项目记录/backups/
+项目记录/*.tmp
+07_示例与交付验收/临时测试/
+Game/Library/
+Game/Temp/
+Game/Logs/
+Game/Obj/
+Game/UserSettings/
+交付包/
